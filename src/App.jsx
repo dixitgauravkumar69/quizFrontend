@@ -10,9 +10,9 @@ function App() {
     const [quizCompleted, setQuizCompleted] = useState(false);
 
     useEffect(() => {
-        axios.get('quizbackend-production-ed22.up.railway.app/api/quiz')
+        axios.get('https://quizbackend-production-ed22.up.railway.app/api/quiz')
             .then(response => setQuestions(response.data))
-            .catch(error => console.log(error));
+            .catch(error => console.error("❌ Failed to fetch questions:", error));
     }, []);
 
     const handleSelect = (answer) => {
@@ -23,7 +23,7 @@ function App() {
         if (selectedAnswer === questions[currentIndex].correctAnswer) {
             setScore(score + 1);
         }
-        
+
         if (currentIndex + 1 < questions.length) {
             setCurrentIndex(currentIndex + 1);
             setSelectedAnswer(null);
@@ -62,8 +62,8 @@ function App() {
 
                 {!quizCompleted && questions.length > 0 && (
                     <div className="text-center mt-6">
-                        <button 
-                            onClick={handleNext} 
+                        <button
+                            onClick={handleNext}
                             disabled={!selectedAnswer}
                             className={`submit-button ${selectedAnswer ? '' : 'disabled'}`}
                         >
