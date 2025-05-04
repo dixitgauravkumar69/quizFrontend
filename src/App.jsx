@@ -10,7 +10,7 @@ function App() {
     const [quizCompleted, setQuizCompleted] = useState(false);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/quiz')
+        axios.get('quizbackend-production-ed22.up.railway.app/api/quiz')
             .then(response => setQuestions(response.data))
             .catch(error => console.log(error));
     }, []);
